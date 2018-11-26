@@ -1,0 +1,9 @@
+﻿Season,Season of data in this row ,categorical
+PM2.5,PM2.5 concentration (ug/m^3) ,numerical
+DEWP,Dew Point,numerical
+TEMP,Temperature,numerical
+PRES,Pressure (hPa) ,numerical
+cbwd,Combined wind direction ,categorical
+Iws,Cumulated wind speed (m/s),numerical
+Is,Cumulated hours of snow ,numerical
+Ir,Cumulated hours of rain,numerical

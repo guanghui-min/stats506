@@ -1,0 +1,37 @@
+---
+title: " Linear Mixed Effects Models in R and Python"
+author: "Jaehoon Lee, Jiali Luan, Guanghui Min"
+date: "11/17/2018"
+output: html_document
+---
+
+##Topic Introduction
+Beijing's air pollution poses a big threat to the health of local residents. The PM 2.5 Index 
+has been known as an important indication of the air quality. Exploring an effective way of predicting PM 2.5 Index will be an important step towards addressing the pollution. However, various factors such as dew point, temperature, pressure, etc. may influence PM 2.5 and the relationship between them remains unclear. Thus, it is challenging to accurately predict PM 2.5. To address this problem, linear mixed effects model is adopted to predict the response variable (ie. air quality) based on the numerous explanatory variables (meteorological records).
+
+
+```{r pm2.5, echo=FALSE, fig.align='center', out.width = '30%'}
+knitr::include_graphics("image.png")
+```
+
+
+##Model Introduction
+Ecological and meteorological data are often complex and messy because of the inclusion of grouping factors like gender, population, continents, and seasons. When fitting a complicated models with many parameters and observations, the data points might not be truly independent from each other. For example, all observations from a meterological dataset could be collected on the same site. Therefore, mixed models were developed to overcome such problem and let us to be able to use all of our data. 
+A typical linear regression model takes the form $$y = X\beta+\epsilon$$ where $X$ is the fixed effects with coefficients $\beta$. $\epsilon$ corresponds to random noise, $\epsilon \sim  \mathcal{N}(0,I)$.
+
+
+In a linear mixed effects model, $Z\gamma$ are being added. $Z$ corresponds to random effects with coefficicients $\gamma$. Tne model has the form $$Y = X\beta +Z\gamma+\epsilon$$ and $\gamma \sim \mathcal{N}(0,\sigma^2I)$.
+
+The difference between fixed and random effects is that a fixed effect is an effect that is constant for a given population, but a random effect is an effect that varies for a given population.
+
+##Data Description
+The PM 2.5 Index dataset includes 43824 observations and 12 attributes. Here is a table of the attributes' information.
+```{r, echo=FALSE}
+var_dis = read.csv("Variable_Description.csv")
+colname = c("Variable",	"Description", "Data Type")
+colnames(var_dis) = colname
+knitr::kable(var_dis)
+```
+
+
+##Language

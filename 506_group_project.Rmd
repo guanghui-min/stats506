@@ -6,11 +6,10 @@ output: html_document
 ---
 
 ##Topic Introduction
-Beijing's air pollution poses a big threat to the health of local residents. 
-The PM 2.5 Index has been known as an important indication of the air quality. 
-Exploring an effective way of predicting PM 2.5 Index will be an important step towards addressing the pollution. 
-However, various factors such as dew point, temperature, pressure, etc. may influence PM 2.5 and the relationship between them remains unclear. 
-Thus, it is challenging to accurately predict PM 2.5. To address this problem, linear mixed effects model is adopted to predict the response variable (ie. air quality) based on the numerous explanatory variables (meteorological records).
+Beijing's air pollution poses a big threat to the health of local residents. The PM 2.5 Index has been known as an important indication of the air quality. 
+Exploring an effective way of predicting PM 2.5 Index will be an important step towards addressing the pollution. However, various factors such as dew point, temperature, pressure, etc.
+may influence PM 2.5 and the relationship between them remains unclear. Thus, it is challenging to accurately predict PM 2.5. To address this problem, 
+linear mixed effects model is adopted to predict the response variable (ie. air quality) based on the numerous explanatory variables (meteorological records).
 
 ```{r setup, include=FALSE}
 library(knitr)

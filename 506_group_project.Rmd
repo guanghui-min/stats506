@@ -288,7 +288,7 @@ From the table we can see only year is not significant, which is not the same co
 BIC(res, resc)
 ```
 
-The coefficients are close to those when using **lme4**, and the regression using **lme4** has smaller BIC.
+The coefficients are close to those when using **lme4**, and regression using **lme4** has smaller BIC.
 
 ### Python
 ```{python, eval=FALSE}
@@ -334,16 +334,16 @@ Here is the output of the Linear Mixed Effect Model in Python. The result is clo
 knitr::include_graphics("python_output.png")
 ```
 
-The coefficients are close to the results from using **lme4** and **nlme**. The result shows that only "hour" and "PRES" are not significant, which agrees with the result from using **lme4**.
+The coefficients are close to the results from using **lme4** and **nlme**. The result shows that only hour and PRES are not significant, which agrees with the result from using **lme4**.
 
+---
 
+## Things to think
 
-## Conclusion
-
-In this study, we applied the Linear Mixed Effects Model to Beijing Air Polution Dataset(pm2.5). After removing some of the outliers, we choose the variable "cbwd", abbreviation of "combined wind direction, as our grouping variable. "Cbwd" is treated as the random effect to fit the non-linear dataset using Mixed Effects Models.
+In this study, we applied the linear mixed effects model to Beijing Air Polution Dataset(pm2.5). After removing some of the outliers, we choose the variable "cbwd", the abbreviation of "combined wind direction, as our grouping variable. as random effect to fit the non-linear dataset using mixed effects models.
 This grouping variable is selected based on common sense and plots that help us finding random slopes. As can be seen from the above analyses,
 we conducted three models in R and Python. The results from the models are really significant suggesting that there are random effects in the dataset.
-When comparing the BICs with the Simple Linear Regression Model, the result shows that the Linear Mixed Effects Model fits better. 
+When comparing the BICs with the simple linear regression, the result shows that the linear mixed effects model fits better. 
 Moreover, we concluded some additional suggestions from this model for the development in future research using this method.
 First, this method may not always work well if we don't have the thorough knowledge of a dataset. For example,this model fits worse without cleaning the dataset and removing the outliers. 
 Second, when there are many variables, it will be more difficult to find which ones to put in the random slope part(in the model function, this part starting with (1|a+b+...+z).
@@ -352,14 +352,14 @@ In addition, in R, when we use different packages, we should consider which mode
 In lmer function(from lme4 library), we used the suggested model, but similarly, in lme function(from nlme library), we got the approximately same result.
 Lastly, the method chosen from **REML** and **ML**(options in the two functions) to do regression should be taken into consideration.
 
-## Data source:
+## Data source
 [**Beijing PM2.5 Data Data Set** from UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/machine-learning-databases/00381/PRSA_data_2010.1.1-2014.12.31.csv)
 
-## References:
+## References
 1.[UCLA: Introduction to Linear Mixed Models - IDRE Stats](https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-linear-mixed-models/)
 
 
-2.[Standford University: Section Week 8 - Linear Mixed Models(https://web.stanford.edu/class/psych252/section/Mixed_models_tutorial.html)
+2.[Standford University: Section Week 8 - Linear Mixed Models](https://web.stanford.edu/class/psych252/section/Mixed_models_tutorial.html)
 
 3.[ETH Zürich: Linear Mixed-Effects Models](https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/lme.html)
 

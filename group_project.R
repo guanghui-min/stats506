@@ -11,7 +11,6 @@ rm(list = ls())
 library(tidyverse)
 library(lme4)
 library(nlme)
-library(lmerTest)
 library(faraway)
 library(stargazer)
 

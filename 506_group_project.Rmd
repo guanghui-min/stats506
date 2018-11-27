@@ -46,7 +46,7 @@ knitr::kable(var_dis)
 
 ## Three Approaches {.tabset .tabset-fade}
 
-### Running Linear Mixed Model using package **lme4** in R
+### **lme4** in R
 ```{r source, include=FALSE}
 source('./group_project.R')
 ```
@@ -76,7 +76,7 @@ We can see that the data is seriously left-skewed, so we need to do some transfo
 ```{r boxcox, warning=FALSE, echo=TRUE}
 # draw the box-cox plot
 g =lm(pm2.5~., data = AQ)
-#boxcox(g,plotit=T)
+boxcox(g,plotit=T)
 # the plot a log transformation for the response 
 AQ=
   AQ%>%
@@ -94,7 +94,7 @@ qplot(cbwd, pm2.5_log, facets = . ~ cbwd,
 We can see that the response shows difference in different groups. It is resasonable to establish the following model:
 
 
-<center>**pm2.5=year+month+day+hour+pm2.5+DEWP+TEMP+PRES+Iws+Is+Ir+(1|cbwd)+$\epsilon$**</center>
+$$pm2.5=year+month+day+hour+pm2.5+DEWP+TEMP+PRES+Iws+Is+Ir+(1|cbwd)+\epsilon$$
 
 In the models above, we assumed that the effect of predictors was the same for all wind directions. However, the effect of politeness might be different for different subjects. So, what we need is a random slope model, where predictors in different wind directions are not only allowed to have differing intercepts, but where they are also allowed to have different slopes. We draw the response **pm2.5** against the predictors in different wind directions.
 
@@ -212,7 +212,7 @@ knitr::include_graphics("Rplot.png")
 
 According to the plots, we decide to choose the following model:
 
-<center>**pm2.5=year+month+day+hour+pm2.5+DEWP+TEMP+PRES+Iws+Is+Ir+(1+hour+PRES|cbwd)+$\epsilon$**</center>
+$$pm2.5=year+month+day+hour+pm2.5+DEWP+TEMP+PRES+Iws+Is+Ir+(1+hour+PRES|cbwd)+\epsilon$$
 
 
 ```{r sum_lme4, warning=FALSE, echo=TRUE}
@@ -242,7 +242,7 @@ BIC(resb, res) # compare the BIC of simple linear regression and linear mixed mo
 Apparently, the random effect is significant.
 
 
-### Running Linear Mixed Model using package **nlme** in R
+### **nlme** in R
 
 We follow the steps to clean and process oringin data in the first part and get our dataset to fit regression. Then we use **nlme**, the default package for mixed model analysis in R, to fit the model.
 
@@ -280,7 +280,7 @@ From the table we can see only year is not significant, which is not the same co
 BIC(res, resc)
 ```
 
-The result is close and regression using **lme4** has rather smaller BIC.
+The coefficients are close to those when using **lme4**, and regression using **lme4** has smaller BIC.
 
 ### Python
 ```{python, eval=FALSE}
@@ -335,4 +335,22 @@ Here is the output of the Linear Mixed Effect Model in Python. The result is clo
 knitr::include_graphics("python_output.png")
 ```
 
-## Conclusion
+The coefficients are close to the results from using **lme4** and **nlme**. The result shows that only hour and PRES are not significant, which agrees with the result from using **lme4**.
+
+
+
+## Conclusion and Reference
+### Things to think
+In the case study, we choose group variable using common sense and use plots to find random slopes. However, such way may not always work if we don't have thorough knowledgement of the dataset and when there are many variables it will be more difficult to find variables to put in the random slope part. Thus, we should pay more attention to model selection for Linear Mixed Model. Also, the method chosen from **REML** and **ML** to do regression should be taken into consideration.
+
+### Data source:
+[**Beijing PM2.5 Data Data Set** from UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/machine-learning-databases/00381/PRSA_data_2010.1.1-2014.12.31.csv)
+
+### References:
+1.[UCLA: Introduction to Linear Mixed Models - IDRE Stats](https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-linear-mixed-models/)
+
+
+2.[Standford University: Section Week 8 - Linear Mixed Models](https://web.stanford.edu/class/psych252/section/Mixed_models_tutorial.html)
+
+
+3.[Gabriela K Hajduk: Introduction to linear mixed models](https://ourcodingclub.github.io/2017/03/15/mixed-models.html?fbclid=IwAR0txmdRYH7OK6nfg1DRnHD9WDEcgcbBkGtGZlw2cTEC_yjnRMb0FsiL22U#FERE)

@@ -332,7 +332,17 @@ The coefficients are close to the results from using **lme4** and **nlme**. The 
 
 ### Conclusion and Reference
 #### Things to think
-In this study, we apply linear mixed model to Beijing Air Polution Dataset(pm2.5). After removing some outliers we choose cbwd as a group variable, which is an abbreviation of combined wind direction as random effect to fit the non-linear dataset using mixed effects models. This group variable is selected using common sense and use plots to find random slopes. As can be seen from the above analyses, we conducted three models in R and Python. The results from the models are really significant suggesting that there are random effects in the dataset. Especially when we compare BIC with the simple linear regression, it shows that the linear mixed model fits better. However, we can conclude some additional results from this model for the development in future research using this method. First, this method may not always work well if we don't have thorough knowledge of the dataset. For example,this model fits worse without cleansing the dataset removing outliers. Second, when there are many variables it will be more difficult to find which ones to put in the random slope part(in the model function, the part starting with (1|a+b+...+z). Thus, we should pay more attention to model selection for applying Linear Mixed Model. Also, in R, when we use different packages, we should consider which model to use to fit the dataaset. In lmer function(from lme4 library) we used the suggested model but in lme function(from nlme library) we slightly changed the model to get the similar result. In addition, the method chosen from **REML** and **ML**(options in the two functions) to do regression should be taken into consideration.
+In this study, we apply linear mixed model to Beijing Air Polution Dataset(pm2.5). After removing some outliers we choose cbwd as a group variable,
+which is an abbreviation of combined wind direction as random effect to fit the non-linear dataset using mixed effects models.
+This group variable is selected using common sense and use plots to find random slopes. As can be seen from the above analyses,
+we conducted three models in R and Python. The results from the models are really significant suggesting that there are random effects in the dataset.
+Especially when we compare BIC with the simple linear regression, it shows that the linear mixed model fits better. 
+However, we can conclude some additional results from this model for the development in future research using this method.
+First, this method may not always work well if we don't have thorough knowledge of the dataset. For example,this model fits worse without cleansing the dataset removing outliers. 
+Second, when there are many variables it will be more difficult to find which ones to put in the random slope part(in the model function, the part starting with (1|a+b+...+z).
+Thus, we should pay more attention to model selection for applying Linear Mixed Model. Also, in R, when we use different packages, we should consider which model to use to fit the dataaset. 
+In lmer function(from lme4 library) we used the suggested model but similarly, in lme function(from nlme library) we got the approximately the same result.
+In addition, the method chosen from **REML** and **ML**(options in the two functions) to do regression should be taken into consideration.
 
 #### Data source:
 [**Beijing PM2.5 Data Data Set** from UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/machine-learning-databases/00381/PRSA_data_2010.1.1-2014.12.31.csv)

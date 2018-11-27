@@ -26,13 +26,13 @@ knitr::include_graphics("image.png")
 
 
 ##Model Introduction
-Ecological and meteorological data are often complex and messy because of the inclusion of grouping factors like gender, population, continents, and seasons. When fitting a complicated models with many parameters and observations, the data points might not be truly independent from each other. For example, all observations from a meterological dataset could be collected on the same site. Therefore, mixed models were developed to overcome such problem and let us to be able to use all of our data. 
+Ecological and meteorological data are often complex and messy because of the inclusion of grouping factors like gender, population, continents, and seasons. When fitting a complicated models with many parameters and observations, the data points might not be truly independent from each other. For example, all observations from a meterological dataset could be collected on the same site. Therefore, mixed models were developed to overcome such problem and let us to be able to use all of our data. Mixed models are applied in many disciplines where multiple correlated measurements are made on each unit of interest. The core of mixed model is that it incorporates fixed and random effects. The difference between fixed and random effects is that a fixed effect is an effect that is constant for a given population, but a random effect is an effect that varies for a given population.
+
 A typical linear regression model takes the form $$y = X\beta+\epsilon$$ where $X$ is the fixed effects with coefficients $\beta$. $\epsilon$ corresponds to random noise, $\epsilon \sim  \mathcal{N}(0,I)$.
 
 
 In a linear mixed effects model, $Z\gamma$ are being added. $Z$ corresponds to random effects with coefficicients $\gamma$. Tne model has the form $$Y = X\beta +Z\gamma+\epsilon$$ and $\gamma \sim \mathcal{N}(0,\sigma^2I)$.
 
-The difference between fixed and random effects is that a fixed effect is an effect that is constant for a given population, but a random effect is an effect that varies for a given population.
 
 ##Data Description
 The PM 2.5 Index dataset includes 43824 observations and 12 attributes. Here is a table of the attributes' information.
@@ -289,7 +289,6 @@ import statsmodels.formula.api as smf
 import pandas as pd
 import numpy as np
 AQ = pd.read_csv('Beijing.csv')
-
 dic = {1: "Winter",
        2: "Winter",
        3: "Spring",
@@ -302,28 +301,20 @@ dic = {1: "Winter",
        10: "Fall",
        11: "Fall",
        12: "Winter"}
-
-
 AQ['season'] = AQ['month'].map(dic)
 AQ = AQ.dropna()
 AQ = AQ[AQ['pm2.5'] > 0]
 AQ['pm25_log'] = np.log(AQ['pm2.5'])
-
 AQ_cv = AQ[AQ['cbwd'] == 'cv']
 AQ_cv = AQ_cv[(AQ_cv['pm25_log'] > 2.2) & (AQ_cv['pm25_log'] < 6.8)]
-
 AQ_NE = AQ[AQ['cbwd'] == 'NE']
 AQ_NE = AQ_NE[(AQ_NE['pm25_log'] > 0.5)]
-
 AQ_NW = AQ[AQ['cbwd'] == 'NW']
 AQ_NW = AQ_NW[(AQ_NW['pm25_log'] > 0.5)]
-
 AQ_SE = AQ[AQ['cbwd'] == 'SE']
 AQ_SE.sort_values(['pm25_log'], ascending=[False])
 AQ_SE = AQ_SE[(AQ_SE['pm25_log'] > 0.5) & (AQ_SE['pm25_log'] < 6.291569)]
-
 AQ_new = pd.concat([AQ_cv, AQ_NE, AQ_NW, AQ_SE])
-
 mixed = smf.mixedlm("pm25_log ~ year+month+day+hour+DEWP+TEMP+PRES+Is+Ir", AQ_new, groups = AQ_new["cbwd"], re_formula="~hour+PRES")
 mixed_fit = mixed.fit()
 print(mixed_fit.summary())
@@ -341,7 +332,7 @@ The coefficients are close to the results from using **lme4** and **nlme**. The 
 
 ## Conclusion and Reference
 ### Things to think
-In the case study, we choose group variable using common sense and use plots to find random slopes. However, such way may not always work if we don't have thorough knowledgement of the dataset and when there are many variables it will be more difficult to find variables to put in the random slope part. Thus, we should pay more attention to model selection for Linear Mixed Model. Also, the method chosen from **REML** and **ML** to do regression should be taken into consideration.
+In this study, we apply linear mixed model to Beijing Air Polution Dataset(pm2.5). After removing some outliers we choose cbwd as a group variable, which is an abbreviation of combined wind direction as random effect to fit the non-linear dataset using mixed effects models. This group variable is selected using common sense and use plots to find random slopes. As can be seen from the above analyses, we conducted three models in R and Python. The results from the models are really significant suggesting that there are random effects in the dataset. Especially when we compare BIC with the simple linear regression, it shows that the linear mixed model fits better. However, we can conclude some additional results from this model for the development in future research using this method. First, this method may not always work well if we don't have thorough knowledge of the dataset. For example,this model fits worse without cleansing the dataset removing outliers. Second, when there are many variables it will be more difficult to find which ones to put in the random slope part(in the model function, the part starting with (1|a+b+...+z). Thus, we should pay more attention to model selection for applying Linear Mixed Model. Also, in R, when we use different packages, we should consider which model to use to fit the dataaset. In lmer function(from lme4 library) we used the suggested model but in lme function(from nlme library) we slightly changed the model to get the similar result. In addition, the method chosen from **REML** and **ML**(options in the two functions) to do regression should be taken into consideration.
 
 ### Data source:
 [**Beijing PM2.5 Data Data Set** from UCI Machine Learning Repository](https://archive.ics.uci.edu/ml/machine-learning-databases/00381/PRSA_data_2010.1.1-2014.12.31.csv)
@@ -352,5 +343,13 @@ In the case study, we choose group variable using common sense and use plots to 
 
 2.[Standford University: Section Week 8 - Linear Mixed Models](https://web.stanford.edu/class/psych252/section/Mixed_models_tutorial.html)
 
+3.[ETH Zürich: Linear Mixed-Effects Models]
+(https://stat.ethz.ch/R-manual/R-devel/library/nlme/html/lme.html)
 
-3.[Gabriela K Hajduk: Introduction to linear mixed models](https://ourcodingclub.github.io/2017/03/15/mixed-models.html?fbclid=IwAR0txmdRYH7OK6nfg1DRnHD9WDEcgcbBkGtGZlw2cTEC_yjnRMb0FsiL22U#FERE)
+4.[Gabriela K Hajduk: Introduction to linear mixed models](https://ourcodingclub.github.io/2017/03/15/mixed-models.html?fbclid=IwAR0txmdRYH7OK6nfg1DRnHD9WDEcgcbBkGtGZlw2cTEC_yjnRMb0FsiL22U#FERE)
+
+5.[Wikipedia: Mixed Model]
+(https://en.wikipedia.org/wiki/Mixed_model)
+
+6.[Jianhua Wang et al, 'Effects of Meteorological Conditions on PM2.5 Concentrations in
+Nagasaki, Japan', J.Environ, Res. Public Health 2015,12, p.9]

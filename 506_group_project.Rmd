@@ -103,7 +103,8 @@ We can see that the response shows difference in different groups. It is resason
 
 $$pm2.5=year+month+day+hour+pm2.5+DEWP+TEMP+PRES+Iws+Is+Ir+(1|cbwd)+\epsilon$$
 
-In the models above, we assumed that the effect of predictors was the same for all wind directions. However, the effect of politeness might be different for different subjects. So, what we need is a random slope model, where predictors in different wind directions are not only allowed to have differing intercepts, but where they are also allowed to have different slopes. We draw the response **pm2.5** against the predictors in different wind directions.
+In the models above, we assumed that the effect of predictors was the same for all wind directions. However, the effect of politeness might be different for different subjects. 
+Therefore, what we need is a random slope model, where predictors in different wind directions are not only allowed to have differing intercepts, however, where they are also allowed to have different slopes. We draw the response **pm2.5** against the predictors in different wind directions.
 
 ```{r function, warning=FALSE, echo=TRUE}
 # Multiple plot function----------------------------------------------------------------------------

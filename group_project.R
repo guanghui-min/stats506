@@ -40,7 +40,7 @@ qplot(cbwd, pm2.5, facets = . ~ cbwd,
 
 # use box-cox method to find a suitable transformation
 g =lm(pm2.5~., data = AQ)
-boxcox(g,plotit=T)
+#boxcox(g,plotit=T)
 
 # according to box-cox, we try y->log(y)-------------------------------------------------------------
 AQ=

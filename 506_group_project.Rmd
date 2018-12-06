@@ -28,12 +28,14 @@ knitr::include_graphics("image.png")
 
 
 ##Model Introduction
-Ecological and meteorological data are often complex and messy because of the inclusion of grouping factors like gender, population, continents, and seasons. 
-When fitting a complicated models with many parameters and observations, the data points might not be truly independent from each other.
-For example, all observations from a meterological dataset could be collected on the same site. 
-Therefore, mixed models were developed to overcome such problem and let us to be able to use all of our data. Mixed models are applied in many disciplines where multiple correlated measurements are made on each unit of interest.
-The core of mixed model is that it incorporates fixed and random effects. The difference between fixed and random effects is that a fixed effect is an effect that is constant for a given population, 
-but a random effect is an effect that varies for a given population.
+Ecological and meteorological data are often complex and messy because of the inclusion of grouping factors like gender, population, continents,
+and seasons. When fitting a complicated models with many parameters and observations, the data points might not be truly independent from each other. For example, all observations from a meterological dataset could be collected on the same site. 
+Therefore, 
+mixed models were developed to overcome such problem and let us to be able to use all of our data. Mixed models are applied in many disciplines
+where multiple correlated measurements are made on each unit of interest.
+The core of
+mixed model is that it incorporates fixed and random effects. The difference between fixed and random effects is that a fixed effect is an effect 
+that is constant for a given population, but a random effect is an effect that varies for a given population.
 
 A typical linear regression model takes the form $$y = X\beta+\epsilon$$ where $X$ is the fixed effects with coefficients $\beta$. $\epsilon$ corresponds to random noise, $\epsilon \sim  \mathcal{N}(0,I)$.
 

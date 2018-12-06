@@ -338,7 +338,7 @@ The coefficients are close to the results from using **lme4** and **nlme**. The 
 
 ---
 
-## Things to think
+## Discussion
 
 In this study, we applied the linear mixed effects model to Beijing Air Polution Dataset(pm2.5). After removing some of the outliers, we choose the variable "cbwd", the abbreviation of "combined wind direction, as our grouping variable. as random effect to fit the non-linear dataset using mixed effects models.
 This grouping variable is selected based on common sense and plots that help us finding random slopes. As can be seen from the above analyses,
@@ -357,7 +357,6 @@ Lastly, the method chosen from **REML** and **ML**(options in the two functions)
 
 ## References
 1.[UCLA: Introduction to Linear Mixed Models - IDRE Stats](https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-linear-mixed-models/)
-
 
 2.[Standford University: Section Week 8 - Linear Mixed Models](https://web.stanford.edu/class/psych252/section/Mixed_models_tutorial.html)
 

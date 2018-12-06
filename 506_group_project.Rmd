@@ -1,6 +1,6 @@
 ---
 title: " Linear Mixed Effects Models in R and Python"
-author: "Jaehoon Lee, Jiali Luan, Guanghui Min"
+author: "Guanghui Min, Jaehoon Lee, Jiali Luan"
 date: "11/26/2018"
 output: html_document
 ---
